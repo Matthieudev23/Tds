@@ -1,0 +1,9 @@
+{{page-title "Ex1"}}
+<Textarea @value={{this.text}} maxLength={{this.MAX}}/>
+<div class="bs-alert alert-info">{{this.size}} caractères</div>
+{{#if this.isFull}}
+  <span class="badge badge-warning">Full</span>
+{{/if}}
+<button {{action "reset"}}>Reset</button>
+<button {{save "login"}}>Login</button>
+{{outlet}}
