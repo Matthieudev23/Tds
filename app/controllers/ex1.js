@@ -5,8 +5,9 @@ import {tracked} from "@glimmer/tracking";
 export default class Ex1Controller extends Controller {
   MAX = 100;
   @tracked text='Entrez votre texte !';
-  @tracked content;
-  @tracked info='';
+  @tracked alert='primary';
+  @tracked savedText = '';
+  @tracked saveDisplay = "none";
 
   get size() {
     if(this.text) {
@@ -20,17 +21,25 @@ export default class Ex1Controller extends Controller {
   }
   @action reset(){
     this.text='';
+    this.alertColor();
   }
 
-  get style(){
-
+  @action save(text){
+    this.savedText = text;
   }
 
-  @save login(){
-
-  }
-
-  @update transform(){
-
+  @action alertColor(){
+    if(this.MAX < 10){
+      this.alert = "danger";
+    }
+    else if (this.MAX < 30){
+      this.alert = "warning";
+    }
+    else if (this.MAX < 50){
+      return this.alert = "success";
+    }
+    else{
+      return this.alert = "primary";
+    }
   }
 }

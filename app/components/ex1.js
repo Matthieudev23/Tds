@@ -1,20 +1,50 @@
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
+import Component from '@ember/component';
+import {action} from '@ember/object';
+import {tracked} from "@glimmer/tracking";
 
-export default class ex1Component extends Component {
-  @tracked text;
-  constructor() {
-    super(...arguments);
-    this.text=this.args.value;
-  }
+export default class Ex1Component extends Component {
+  MAX = 100;
+  @tracked text='Entrez votre texte !';
+  @tracked alert='primary';
+  @tracked savedText = '';
+  @tracked saveDisplay = "none";
+
   get size() {
-    if(this.text){
+    if(this.text) {
       return this.text.length;
     }
     return 0;
   }
 
-  get full(){
-    return this.max <= this.size;
+  get isFull() {
+    return this.MAX <= this.size;
+  }
+  @action reset(){
+    this.text='';
+  }
+
+  @action save(text){
+    this.savedText = text;
+    if (this.savedText.length > 0){
+      this.saveDisplay = "block";
+    }
+    else {
+      this.saveDisplay = "none";
+    }
+  }
+
+  @action alertColor(){
+    if(this.MAX < 10){
+      this.alert = "danger";
+    }
+    else if (this.MAX < 30){
+      this.alert = "warning";
+    }
+    else if (this.MAX < 50){
+      return this.alert = "success";
+    }
+    else{
+      return this.alert = "primary";
+    }
   }
 }

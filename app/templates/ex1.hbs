@@ -1,9 +1,25 @@
 {{page-title "Ex1"}}
+<div class="card" style="padding: 1em;">
+  <div class="card-header">
+    <h2>Application note :</h2>
+  </div>
 <Textarea @value={{this.text}} maxLength={{this.MAX}}/>
+  {{#if this.alert}}
+    <div class="alert alert-{{this.alert}}" role="alert"></div>
+  {{/if}}
 <div class="bs-alert alert-info">{{this.size}} caractères</div>
 {{#if this.isFull}}
   <span class="badge badge-warning">Full</span>
 {{/if}}
 <button {{action "reset"}}>Reset</button>
-<button {{save "login"}}>Login</button>
+<button {{action "save" this.text}}>Save</button>
+  {{#if this.savedText}}
+  <div class="alert alert-dark" style="margin-top: 2em;" role="alert">
+    <b>Text saved :</b><br>
+       {{this.savedText}}<br>
+    <button type="button" class="btn btn-secondary" style="margin-top: 0.8em;" {{on "click" (fn this.save ''
+    )}}>Delete</button>
+  </div>
+  {{/if}}
+</div>
 {{outlet}}

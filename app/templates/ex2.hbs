@@ -1,0 +1,8 @@
+{{page-title "Ex2"}}
+<h1>Service</h1>
+{{#each @model.services as |srv|}}
+  <li><a href="#"   {{action "toggle" srv}} >{{srv.name}}   {{srv.price}} €</a></li>
+{{/each}}
+<p>{{@model.countActive}}</p>
+<p>{{@model.sumActive}}</p>
+{{outlet}}
